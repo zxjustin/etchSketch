@@ -1,7 +1,9 @@
-const container = document.getElementById('grid-container');
+// script.js
+const container = document.querySelector('.container');
 
-for (let i = 0; i < 16 * 16; i++) {
+// Number of squares: 16x16 = 256
+for (let i = 0; i < 256; i++) {
     const square = document.createElement('div');
-    square.classList.add('grid-item');
+    square.classList.add('square');
     container.appendChild(square);
 }

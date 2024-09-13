@@ -1,13 +1,14 @@
-#grid-container {
-    display:grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
-    width: 400px;  /* Adjust as needed */
-    height: 400px; /* Adjust as needed */
+/* styles.css */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px; /* Example width, can adjust based on your needs */
+    height: 400px;
+    border: 1px solid black; /* Optional: to visualize the container */
 }
 
-
-.grid-item {
-    border: 1px solid #ccc;  /* Optional to see the divs clearly */
-    background-color: lightblue;  /* Optional background */
+.square {
+    flex: 1 0 6.25%; /* This creates the 16x16 grid (100% / 16 = 6.25%) */
+    border: 1px solid grey; /* Optional: to see each square */
+    box-sizing: border-box; /* Ensures padding and border don't affect size */
 }
