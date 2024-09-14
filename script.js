@@ -1,6 +1,9 @@
 // script.js
 const container = document.querySelector('.container');
 const button = document.querySelector('#gridButton');
+const blueButton = document.querySelector('#blueButton');
+const randomButton = document.querySelector('#randomButton');
+
 
 // Container width and height 960px by 960px
 const containerSize = 960;
@@ -24,11 +27,14 @@ for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
 
     let darkenAmount = 0;
     // Event Listener for hover effect
-    // square.addEventListener('mouseenter', () => {
-    //     square.style.background = 'lightblue';
-    // });
-    
-    square.addEventListener('mouseenter', () => {
+    blueButton.addEventListener('click', () => {
+        square.addEventListener('mouseenter', () => {
+            square.style.background = 'lightblue';
+        });
+    });
+//Random RGB color
+    randomButton.addEventListener('click', () => {
+        square.addEventListener('mouseenter', () => {
             if (darkenAmount === 0) {
                 // First interaction: set a random RGB color
                 square.style.backgroundColor = randomRGB();
@@ -41,6 +47,7 @@ for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
                 darkenAmount = 1; // Cap at fully dark
             }
         });
+    });
     // //Resets the color
     // square.addEventListener('mouseleave', () => {
     //     square.style.backgroundColor = 'white';
