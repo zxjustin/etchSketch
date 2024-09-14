@@ -3,6 +3,7 @@ const container = document.querySelector('.container');
 const button = document.querySelector('#gridButton');
 const blueButton = document.querySelector('#blueButton');
 const randomButton = document.querySelector('#randomButton');
+const eraserButton = document.querySelector('#eraserButton');
 
 
 // Container width and height 960px by 960px
@@ -37,7 +38,7 @@ for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
         square.addEventListener('mouseenter', () => {
             if (darkenAmount === 0) {
                 // First interaction: set a random RGB color
-                square.style.backgroundColor = randomRGB();
+                square.style.background = randomRGB();
             }
 
             darkenAmount += 0.1; // Increase darkening by 10% per hover
@@ -48,11 +49,13 @@ for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
             }
         });
     });
-    // //Resets the color
-    // square.addEventListener('mouseleave', () => {
-    //     square.style.backgroundColor = 'white';
-    // });
-    
+
+    //Resets the color acts as an eraser
+    eraserButton.addEventListener('click', () =>{
+        square.addEventListener('mouseleave', () => {
+            square.style.backgroundColor = 'white';
+        });
+    });
     container.appendChild(square);
     }
 }
