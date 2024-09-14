@@ -11,6 +11,6 @@
     flex: 1 0 6.25%; /* This creates the 16x16 grid (100% / 16 = 6.25%) */
     border: 1px solid grey; /* Optional: to see each square */
     box-sizing: border-box; /* Ensures padding and border don't affect size */
-    background-color: white; /* Default color */
+    background-color: white;  /*Default color */
     transition: background-color 0.2s ease; /*Transition for smoothness*/
 }
