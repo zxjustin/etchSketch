@@ -20,45 +20,60 @@ function createGrid(squaresPerSide) {
     container.style.height = `${containerSize}px`;
 
 // Number of squares: 16x16 = 256
-for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
-    const square = document.createElement('div');
-    square.classList.add('square');
-    square.style.width = `${squareSize}px`;
-    square.style.height = `${squareSize}px`;
+    for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        square.style.width = `${squareSize}px`;
+        square.style.height = `${squareSize}px`;
+        container.appendChild(square);
+    }
+    applyColorListeners();
+}
+function randomRGB() {
+    const r = Math.floor(Math.random() * 256); // Random value for Red (0-255)
+    const g = Math.floor(Math.random() * 256); // Random value for Green (0-255)
+    const b = Math.floor(Math.random() * 256); // Random value for Blue (0-255)
+    return `rgb(${r}, ${g}, ${b})`;
+}
 
-    let darkenAmount = 0;
-    // Event Listener for hover effect
+function applyColorListeners(){
+    const squares = document.querySelectorAll('.square');
+
+    // Clear any previous event listeners
     blueButton.addEventListener('click', () => {
-        square.addEventListener('mouseenter', () => {
-            square.style.background = 'lightblue';
+        squares.forEach(square => {
+            square.onmouseenter = () => {
+                square.style.background = 'lightblue';
+            };
         });
     });
+
 //Random RGB color
     randomButton.addEventListener('click', () => {
-        square.addEventListener('mouseenter', () => {
-            if (darkenAmount === 0) {
-                // First interaction: set a random RGB color
-                square.style.background = randomRGB();
-            }
-
-            darkenAmount += 0.1; // Increase darkening by 10% per hover
-            square.style.filter = `brightness(${1 - darkenAmount})`; // Reduce brightness
-
-            if (darkenAmount >= 1) {
-                darkenAmount = 1; // Cap at fully dark
-            }
+        squares.forEach(square => {
+            let darkenAmount = 0; // Reset darken amount for each square
+            square.onmouseenter = () => {
+                if (darkenAmount === 0) {
+                    square.style.background = randomRGB();
+                }
+                darkenAmount += 0.1;
+                square.style.filter = `brightness(${1 - darkenAmount})`;
+                if (darkenAmount >= 1) darkenAmount = 1; // Fully darkened
+            };
         });
     });
 
     //Resets the color acts as an eraser
     eraserButton.addEventListener('click', () =>{
-        square.addEventListener('mouseleave', () => {
-            square.style.backgroundColor = 'white';
+        squares.forEach(square => {
+            square.onmouseenter = () => {
+                square.style.background = 'white'; // Reset color to white
+                square.style.filter = 'brightness(1)'; // Reset brightness
+            };
         });
     });
-    container.appendChild(square);
-    }
 }
+    
 button.addEventListener('click', () => {
     let squaresPerSide = prompt('Enter the number of squares per side (maximum 100):');
     
@@ -72,12 +87,5 @@ button.addEventListener('click', () => {
         alert('Please enter a valid number between 1 and 100.');
     }
 });
-
-function randomRGB() {
-    const r = Math.floor(Math.random() * 256); // Random value for Red (0-255)
-    const g = Math.floor(Math.random() * 256); // Random value for Green (0-255)
-    const b = Math.floor(Math.random() * 256); // Random value for Blue (0-255)
-    return `rgb(${r}, ${g}, ${b})`;
-}
 // Create a default 16x16 grid on page load
 createGrid(16);
